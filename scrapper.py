@@ -1,6 +1,6 @@
 import vk_api
 import requests
-import security
+from py.security import *
 import datetime
 import time
 import json
@@ -8,10 +8,9 @@ import os
 from PIL import Image  # method to show pictures
 from io import BytesIO
 
-access_token = security.access_token
 
 # authentication info
-vk_session = vk_api.VkApi(token=access_token)  # enter my token
+vk_session = vk_api.VkApi(token=access_token)  # enter token
 vk = vk_session.get_api()  # get access to the API
 
 
@@ -105,29 +104,25 @@ class VkImageGrabber:
                     'thumbnail': image['sizes'][0]['url']  # url for thumbnail.
                 }
             )
-        with open(f'../json/{object_name}_{object_id}_{album_name}.json', 'w') as file:
-            json.dump(result, file, indent=4, ensure_ascii=False)
+        # with open(f'json/{object_name}_{object_id}_{album_name}.json', 'w') as file:
+        #     json.dump(result, file, indent=4, ensure_ascii=False)
         return result
 
-    def __str__(self):
-        return f"input data: Screen_name = {self.screen_id}, album_id =" \
-               f"  {self.album_id}, images_count = {self.images_count}"
-
-    def show_image(self):
-        images_data = self.get_images_data()
-        image_to_show = 0
-        result = requests.get(images_data[image_to_show]['big_picture'])
-        # print(images_data[result])
-        # result = requests.get(images_data['big_picture'])
-        print(result)
-        image = Image.open(BytesIO(result.content))
-        image.show()
+    # def show_image(self):
+    #     images_data = self.get_images_data()
+    #     image_to_show = 0
+    #     result = requests.get(images_data[image_to_show]['big_picture'])
+    #     # print(images_data[result])
+    #     # result = requests.get(images_data['big_picture'])
+    #     print(result)
+    #     image = Image.open(BytesIO(result.content))
+    #     image.show()
 
     def download_images(self, tick=0):
         start_time = time.time()
         images_data = self.get_images_data()
         album_name = images_data[0]['album_name']
-        save_images_to = f"../Photos/{album_name}/"  # path to save images
+        save_images_to = f"Photos/{album_name}/"  # path to save images
         os.makedirs(save_images_to, exist_ok=True)
         # print(images_data)
 
@@ -146,37 +141,48 @@ class VkImageGrabber:
               f"\nTime: {int(total_seconds // 60):02d}m : {int(total_seconds % 60):02d}s"
               f"\n=======================")
 
+        def __str__(self):
+            return f"input data: Screen_name = {self.screen_id}, album_id =" \
+                   f"  {self.album_id}, images_count = {self.images_count}"
 
-images_count = 2
 
-owner_id = -39043966
-album_id = 157130717
+images_count = 3
 
-# тест для группы
+
+# my group V
 # owner_id = -39043966
 # album_id = 157130717
-# # тест для юзера
-# owner_id = 7689860
-# # owner_id = "i_shokhin"
-# album_id = 225552311
+
+owner_id = -70022346
+album_id = 255403373
+
+
+
 
 grabbed_images = VkImageGrabber(screen_id=owner_id, album_id=album_id, images_count=images_count)
-grabbed_images.download_images()
+# print(grabbed_images.decode_id())
+# grabbed_images.download_images()
+
+#
+def run_scrapper():
+    print(grabbed_images.decode_id())
+    grabbed_images.download_images()
+    return "FINALY"
 
 
+# run_scrapper()
+#
+# 'Lis-And-Rox Rowe' X
+# UnicodeEncodeError: 'charmap' codec can't encode character '\xf3' in position 10: character maps to <undefined>
+# owner_id = 93217433
+# album_id = 115419411
 
-# print(f"--- %.2f seconds ---" % (time.time() - start_time))
-# print(f"--- %.2f seconds ---" % (time.time() - start_time) * 60, 2)
+# random user
+    # owner_id = 'mikerezler'
+    # album_id = 456241036
+    # # Доступ к сохранёнкам можно получить только с помощью user_access_api!!
+    # # Апи сервисного приложения не подойдет.
 
-
-
-
-
-# print(grabbed_images.grabbing_parameters())
-# print(grabbed_images.get_images_data())
-# # grabbed_images.get_album_name()
-## # info = grabbed_images.decode_id()
-# # print(info)
-
-# print(grabbed_images.show_image())
-# print(VkDownloadImages.download_images())
+# Me
+# owner_id = 52373470
+# album_id = 333658955
