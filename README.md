@@ -1,1 +1,1 @@
-# vk_art_scrapper
+# art_scrapper
