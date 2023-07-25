@@ -17,4 +17,5 @@ def serve_js(path):
     return send_from_directory('js', path)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5555, debug=True)
+

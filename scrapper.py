@@ -104,19 +104,19 @@ class VkImageGrabber:
                     'thumbnail': image['sizes'][0]['url']  # url for thumbnail.
                 }
             )
-        # with open(f'json/{object_name}_{object_id}_{album_name}.json', 'w') as file:
-        #     json.dump(result, file, indent=4, ensure_ascii=False)
+        with open(f'json/{object_name}_{object_id}_{album_name}.json', 'w') as file:
+            json.dump(result, file, indent=4, ensure_ascii=True)
         return result
 
-    # def show_image(self):
-    #     images_data = self.get_images_data()
-    #     image_to_show = 0
-    #     result = requests.get(images_data[image_to_show]['big_picture'])
-    #     # print(images_data[result])
-    #     # result = requests.get(images_data['big_picture'])
-    #     print(result)
-    #     image = Image.open(BytesIO(result.content))
-    #     image.show()
+    def show_image(self):
+        images_data = self.get_images_data()
+        image_to_show = 0
+        result = requests.get(images_data[image_to_show]['big_picture'])
+        # print(images_data[result])
+        # result = requests.get(images_data['big_picture'])
+        print(result)
+        image = Image.open(BytesIO(result.content))
+        image.show()
 
     def download_images(self, tick=0):
         start_time = time.time()
@@ -158,19 +158,20 @@ album_id = 255403373
 
 
 
-
 grabbed_images = VkImageGrabber(screen_id=owner_id, album_id=album_id, images_count=images_count)
 # print(grabbed_images.decode_id())
 # grabbed_images.download_images()
 
-#
+
 def run_scrapper():
     print(grabbed_images.decode_id())
     grabbed_images.download_images()
     return "FINALY"
 
 
-# run_scrapper()
+if __name__ == '__main__':
+    run_scrapper()
+    # grabbed_images.show_image()
 #
 # 'Lis-And-Rox Rowe' X
 # UnicodeEncodeError: 'charmap' codec can't encode character '\xf3' in position 10: character maps to <undefined>
