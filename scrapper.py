@@ -16,7 +16,7 @@ vk = vk_session.get_api()  # get access to the API
 
 class VkImageGrabber:
 
-    def __init__(self, screen_id=-39043966, album_id=157131299, images_count=2):
+    def __init__(self, screen_id=-6116144, album_id=285882185, images_count=2):
         # if group id starts with positive number, this is a user. If with negative - it is a group
         self.screen_id = screen_id
         self.album_id = album_id
@@ -146,16 +146,10 @@ class VkImageGrabber:
                    f"  {self.album_id}, images_count = {self.images_count}"
 
 
+# указана группа для тестирования
+owner_id = -6116144
+album_id = 285882185
 images_count = 3
-
-
-# my group V
-# owner_id = -39043966
-# album_id = 157130717
-
-owner_id = -70022346
-album_id = 255403373
-
 
 
 grabbed_images = VkImageGrabber(screen_id=owner_id, album_id=album_id, images_count=images_count)
@@ -171,19 +165,5 @@ def run_scrapper():
 
 if __name__ == '__main__':
     run_scrapper()
-    # grabbed_images.show_image()
-#
-# 'Lis-And-Rox Rowe' X
-# UnicodeEncodeError: 'charmap' codec can't encode character '\xf3' in position 10: character maps to <undefined>
-# owner_id = 93217433
-# album_id = 115419411
+    # grabbed_images.show_image()  # раскомментировать если надо сразу посмотреть одно из фото
 
-# random user
-    # owner_id = 'mikerezler'
-    # album_id = 456241036
-    # # Доступ к сохранёнкам можно получить только с помощью user_access_api!!
-    # # Апи сервисного приложения не подойдет.
-
-# Me
-# owner_id = 52373470
-# album_id = 333658955

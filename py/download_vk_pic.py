@@ -1,3 +1,9 @@
+"""
+Класс для скачивания будет вынесен в этот файл, но потом
+
+"""
+
+
 from scrapper import VkImageGrabber
 import os
 import requests  # method for downloading photos
